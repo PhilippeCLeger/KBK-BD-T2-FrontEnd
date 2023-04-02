@@ -46,9 +46,9 @@ const InsertOuvrage = () => {
                         </Dropdown.Toggle>
 
                         <Dropdown.Menu>
-                            <Dropdown.Item onClick={() => setSelectedItem(PÉRIODICITÉ.HEBDOMADAIRE)}>Hebdomadaire</Dropdown.Item>
-                            <Dropdown.Item onClick={() => setSelectedItem(PÉRIODICITÉ.MENSUELLE)}>Mensuelle</Dropdown.Item>
-                            <Dropdown.Item onClick={() => setSelectedItem(PÉRIODICITÉ.JOURNALIÈRE)}>Journalière</Dropdown.Item>
+                            <Dropdown.Item onClick={() => setSelectedPeriodicite(PÉRIODICITÉ.HEBDOMADAIRE)}>Hebdomadaire</Dropdown.Item>
+                            <Dropdown.Item onClick={() => setSelectedPeriodicite(PÉRIODICITÉ.MENSUELLE)}>Mensuelle</Dropdown.Item>
+                            <Dropdown.Item onClick={() => setSelectedPeriodicite(PÉRIODICITÉ.JOURNALIÈRE)}>Journalière</Dropdown.Item>
                         </Dropdown.Menu>
                     </Dropdown>
                     <label>
