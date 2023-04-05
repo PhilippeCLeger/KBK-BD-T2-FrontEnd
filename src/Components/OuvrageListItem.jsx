@@ -5,6 +5,7 @@ import AccordionDetails from '@mui/material/AccordionDetails';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import ExpandLessIcon from '@mui/icons-material/ExpandLess';
 import { useState } from "react";
+import { TYPES_OUVRAGES } from "../Enums";
 
 
 const OuvrageListItem = ({ouvrage}) => {
@@ -26,9 +27,11 @@ const OuvrageListItem = ({ouvrage}) => {
         </AccordionSummary>
         <AccordionDetails>
           <Box>
-            <Box>Année d'édition: {ouvrage.annee}</Box>
-            <Box>Maison d'édition: {ouvrage.maison}</Box>
-            <Box>Auteur: {ouvrage.auteur}</Box>
+            {ouvrage.type === TYPES_OUVRAGES.LIVRE && <Box>Année d'édition: {ouvrage.annee}</Box>}
+            {ouvrage.type === TYPES_OUVRAGES.LIVRE && <Box>Maison d'édition: {ouvrage.maison}</Box>}
+            {ouvrage.type === TYPES_OUVRAGES.LIVRE && <Box>Auteur: {ouvrage.auteur}</Box>}
+            {ouvrage.type === TYPES_OUVRAGES.PÉRIODIQUE && <Box>Périodicité: {ouvrage.periodicite}</Box>}
+            {ouvrage.type === TYPES_OUVRAGES.PÉRIODIQUE && <Box>Date de parution: {ouvrage.dateParution}</Box>}
             {ouvrage.exemplaires.map((ex => 
                 <Box key={ex.no} sx={{display:"flex", gap: 1}}>
                     <Box sx={{borderRadius: "50%", width: "1rem", height: "1rem", backgroundColor: ex.estDisponible ? "success.main" : "error.main"}}/>
