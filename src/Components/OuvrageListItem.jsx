@@ -13,6 +13,7 @@ const OuvrageListItem = ({ouvrage}) => {
             borderLeft:8,  
             borderColor: estDisponible ? "success.main" : "error.main", 
             p:"0.5rem",
+            maxWidth: "40rem"
             }}>
             <AccordionSummary
             expandIcon={<ExpandMoreIcon />}

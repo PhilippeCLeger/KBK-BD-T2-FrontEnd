@@ -7,7 +7,7 @@ import OuvrageListItem from "./OuvrageListItem";
 
 const OuvragesList = () => {
     const {ouvrages, refreshOuvrages} = useGetOuvrages();
-    return <Box sx={{display:'flex', flexDirection:'column', gap:1}}>
+    return <Box sx={{display:'flex', flexDirection:'column', alignItems: "stretch"}}>
         <Button onClick={refreshOuvrages}>REFRESH</Button>
         {ouvrages && 
         ouvrages.map(
