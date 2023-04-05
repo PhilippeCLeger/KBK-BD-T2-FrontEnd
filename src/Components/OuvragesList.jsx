@@ -1,4 +1,4 @@
-import { Button } from "@mui/material";
+import { Button, Box } from "@mui/material";
 import { useEffect, useState } from "react";
 import { TYPES_OUVRAGES } from "../Enums";
 import { getOuvrages } from "../API";
@@ -7,14 +7,14 @@ import OuvrageListItem from "./OuvrageListItem";
 
 const OuvragesList = () => {
     const {ouvrages, refreshOuvrages} = useGetOuvrages();
-    return <>
+    return <Box sx={{display:'flex', flexDirection:'column', gap:1}}>
         <Button onClick={refreshOuvrages}>REFRESH</Button>
         {ouvrages && 
         ouvrages.map(
             (ouvrage) => (
             <OuvrageListItem key={ouvrage._id} ouvrage={ouvrage}/>
             ))}
-    </>
+    </Box>
 }
 
 export default OuvragesList;
