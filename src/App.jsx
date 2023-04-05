@@ -9,26 +9,31 @@ import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 
 import { TYPES_OUVRAGES } from './Enums'
 import {useState} from 'react'
+import OuvrageForm from './Components/OuvrageForm';
 
 function App() {
   const [type, setType] = useState(TYPES_OUVRAGES.LIVRE.toString());
   return (
     <div className="App">
       <Box sx={{display: "flex", flexDirection: "column", alignItems: "center"}}>
-        <TabContext value={type}>
-          <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
-            <TabList onChange={(e, val) => setType(val.toString())} aria-label="lab API tabs example">
-              <Tab label="Livres" value={TYPES_OUVRAGES.LIVRE.toString()} />
-              <Tab label="Périodiques"  value={TYPES_OUVRAGES.PÉRIODIQUE.toString()} />
-            </TabList>
-          </Box>
-          {Object.values(TYPES_OUVRAGES).map(type => (
-            <TabPanel value={type.toString()}>
-              <OuvragesList type={type}/>
-              <ExampleForm/>
-            </TabPanel>
-          ))}
-        </TabContext>
+        <Box sx={{display: "flex", flexDirection: "column", alignItems: "stretch", width:"40rem"}}>
+          <TabContext value={type}>
+            <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
+              <TabList onChange={(e, val) => setType(val.toString())} aria-label="lab API tabs example">
+                <Tab label="Livres" value={TYPES_OUVRAGES.LIVRE.toString()} />
+                <Tab label="Périodiques"  value={TYPES_OUVRAGES.PÉRIODIQUE.toString()} />
+              </TabList>
+            </Box>
+            {Object.values(TYPES_OUVRAGES).map(type => (
+              <TabPanel value={type.toString()}>
+                <Box sx={{display:'flex', flexDirection:'column', gap:1}}>
+                  <OuvrageForm type={type} />
+                  <OuvragesList type={type}/>
+                </Box>
+              </TabPanel>
+            ))}
+          </TabContext>
+        </Box>
       </Box>
     </div>
   )
