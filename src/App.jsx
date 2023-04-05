@@ -14,20 +14,22 @@ function App() {
   const [type, setType] = useState(TYPES_OUVRAGES.LIVRE.toString());
   return (
     <div className="App">
-      <TabContext value={type}>
-        <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
-          <TabList onChange={(e, val) => setType(val.toString())} aria-label="lab API tabs example">
-            <Tab label="Livres" value={TYPES_OUVRAGES.LIVRE.toString()} />
-            <Tab label="Périodiques"  value={TYPES_OUVRAGES.PÉRIODIQUE.toString()} />
-          </TabList>
-        </Box>
-        {Object.values(TYPES_OUVRAGES).map(type => (
-          <TabPanel value={type.toString()}>
-            <OuvragesList type={type}/>
-            <ExampleForm/>
-          </TabPanel>
-        ))}
-      </TabContext>
+      <Box sx={{display: "flex", flexDirection: "column", alignItems: "center"}}>
+        <TabContext value={type}>
+          <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
+            <TabList onChange={(e, val) => setType(val.toString())} aria-label="lab API tabs example">
+              <Tab label="Livres" value={TYPES_OUVRAGES.LIVRE.toString()} />
+              <Tab label="Périodiques"  value={TYPES_OUVRAGES.PÉRIODIQUE.toString()} />
+            </TabList>
+          </Box>
+          {Object.values(TYPES_OUVRAGES).map(type => (
+            <TabPanel value={type.toString()}>
+              <OuvragesList type={type}/>
+              <ExampleForm/>
+            </TabPanel>
+          ))}
+        </TabContext>
+      </Box>
     </div>
   )
 }
