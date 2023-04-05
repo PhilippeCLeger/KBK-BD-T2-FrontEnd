@@ -14,7 +14,7 @@ export const getOuvrages = async (type) => {
 export const insertOuvrage = async (ouvrage) => {
   const response = await fetch(`${URLS.OUVRAGES}`, {
     method: "POST",
-    body: ouvrage,
+    body: ouvrage
   });
   return response.json();
 };
