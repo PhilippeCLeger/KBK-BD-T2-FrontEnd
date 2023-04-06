@@ -25,7 +25,7 @@ function App() {
               </TabList>
             </Box>
             {Object.values(TYPES_OUVRAGES).map(type => (
-              <TabPanel value={type.toString()}>
+              <TabPanel key={type} value={type.toString()}>
                 <Box sx={{display:'flex', flexDirection:'column', gap:1}}>
                   <OuvrageForm type={type} />
                   <OuvragesList type={type}/>
