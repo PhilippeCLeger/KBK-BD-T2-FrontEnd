@@ -14,7 +14,14 @@ export const getOuvrages = async (type) => {
 export const insertOuvrage = async (ouvrage) => {
   const response = await fetch(`${URLS.OUVRAGES}`, {
     method: "POST",
-    body: ouvrage
+    body: JSON.stringify(ouvrage),
   });
   return response.json();
 };
+
+export const estNoExemplaireLibre = async (noExemplaire) => {
+  // TODO: implémenter le point de terminaison qui vérifie si 
+  // un numéro d'exemplaire est disponible ou non.
+  const response = await new Promise(() => {});
+  return true;
+}

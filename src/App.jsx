@@ -1,11 +1,6 @@
-import {Box, Button, TextField, Tab} from '@mui/material'
+import {Box, Tab} from '@mui/material'
 import {TabContext, TabList, TabPanel} from '@mui/lab'
 import OuvragesList from './Components/OuvragesList'
-import ExampleForm from './Components/ExampleForm'
-import Accordion from '@mui/material/Accordion';
-import AccordionSummary from '@mui/material/AccordionSummary';
-import { Card, Grid, Typography } from "@mui/material";
-import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 
 import { TYPES_OUVRAGES } from './Enums'
 import {useState} from 'react'
