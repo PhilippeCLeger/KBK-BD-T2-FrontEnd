@@ -23,5 +23,5 @@ export const isIdAvailable = async (noExemplaire) => {
   const response = await fetch(`${URLS.OUVRAGES}?no=${noExemplaire}`, {
     method: "GET",
   });
-  return response;
+  return response.json();
 };
