@@ -19,9 +19,9 @@ export const insertOuvrage = async (ouvrage) => {
   return response.json();
 };
 
-export const estNoExemplaireLibre = async (noExemplaire) => {
-  // TODO: implémenter le point de terminaison qui vérifie si 
-  // un numéro d'exemplaire est disponible ou non.
-  const response = await new Promise(() => {});
-  return true;
-}
+export const isIdAvailable = async (noExemplaire) => {
+  const response = await fetch(`${URLS.OUVRAGES}?no=${noExemplaire}`, {
+    method: "GET",
+  });
+  return response.json();
+};
