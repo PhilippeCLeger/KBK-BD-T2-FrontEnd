@@ -3,7 +3,6 @@ import { Box, Switch } from "@mui/material";
 
 const ExemplaireForm = ({ouvrage, setOuvrage, errors, index}) => {
 
-
     return (
         <Box sx={{display:'flex', flexDirection:'row', gap:1, alignItems:'center'}}>
             <ValidatedTextField 
@@ -14,7 +13,7 @@ const ExemplaireForm = ({ouvrage, setOuvrage, errors, index}) => {
                     ouvrage.exemplaires[index] = exemplaire;
                     setOuvrage({ ...ouvrage });
                 }}
-                errors={errors.exemplaires ? errors.exemplaires[index] ?? {} : {}}
+                errors={errors.exemplaires[index]}
             />
             <Switch  name="estDisponible" checked={ouvrage.exemplaires[index].estDisponible} 
             onChange={(e) => {

@@ -7,7 +7,7 @@ import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import { useState, useEffect, useCallback } from 'react';
 import ValidatedTextField from "./ValidatedTextField";
 import ExemplaireForm from "./ExemplaireForm";
-import { estNoExemplaireLibre, insertOuvrage } from '../API';
+import { isIdAvailable, insertOuvrage } from '../API';
 
 
 const isValidDate = (strDate) => {
@@ -26,15 +26,13 @@ const isValidDate = (strDate) => {
 const validateExemplaire = async (exemplaire) => {
     const errors = {};
     if(!exemplaire.no) errors.no = "Requis";
-    else if (!estNoExemplaireLibre(exemplaire.no)) errors.no = `${exemplaire.no} est déjà utilisé`;
+    else if (!( await isIdAvailable(exemplaire.no))) errors.no = `${exemplaire.no} est déjà utilisé`;
     return errors;
 }
 
 const addValidateExemplaire = async (ouvrage, errors, index) => {
     const errorsExemplaire = await validateExemplaire(ouvrage.exemplaires[index]);
-    if(Object.values(errorsExemplaire).length > 0){
-        errors.exemplaires[index] = errorsExemplaire;
-    }
+    errors.exemplaires[index] = errorsExemplaire;
 }
 
 const getDefaultErrors = (type) => ({exemplaires: type === TYPES_OUVRAGES.LIVRE ? [{}, {}, {}] : [{}]});
@@ -42,16 +40,14 @@ const getDefaultErrors = (type) => ({exemplaires: type === TYPES_OUVRAGES.LIVRE 
 const validateOuvrage = async (ouvrage) => {
     const errors = getDefaultErrors(ouvrage.type);
     if(!ouvrage.titre) errors.titre = "Requis";
-    addValidateExemplaire(ouvrage, errors, 0);
+    await addValidateExemplaire(ouvrage, errors, 0);
     if(ouvrage.type === TYPES_OUVRAGES.LIVRE){
-        addValidateExemplaire(ouvrage, errors, 1);
-        addValidateExemplaire(ouvrage, errors, 2);
+        await addValidateExemplaire(ouvrage, errors, 1);
+        await addValidateExemplaire(ouvrage, errors, 2);
         if(!ouvrage.annee) errors.annee = "Requise";
         if(!!ouvrage.annee && isNaN(parseInt(ouvrage.annee))) errors.annee = "Année invalide";
         if(!ouvrage.maison) errors.maison = "Requise";
         if(!ouvrage.auteur) errors.auteur = "Requis";
-        if(!ouvrage.exemplaires[1] || !ouvrage.exemplaires[1].no) errors.exemplaireNo1 = "Requis";
-        if(!ouvrage.exemplaires[2] || !ouvrage.exemplaires[2].no) errors.exemplaireNo1 = "Requis";
     }
     else{
         if(
@@ -62,7 +58,6 @@ const validateOuvrage = async (ouvrage) => {
         if(!ouvrage.dateParution)  errors.dateParution = "Requise";
         else if(!isValidDate(ouvrage.dateParution)) errors.dateParution = "Année invalide";
     }
-
     return errors;
 }
 

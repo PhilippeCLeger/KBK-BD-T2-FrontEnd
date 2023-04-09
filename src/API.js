@@ -20,8 +20,11 @@ export const insertOuvrage = async (ouvrage) => {
 };
 
 export const isIdAvailable = async (noExemplaire) => {
-  const response = await fetch(`${URLS.OUVRAGES}?no=${noExemplaire}`, {
-    method: "GET",
-  });
+  const response = await fetch(
+    `${URLS.OUVRAGES}/isIdAvailable?no=${noExemplaire}`,
+    {
+      method: "GET",
+    }
+  );
   return response.json();
 };
