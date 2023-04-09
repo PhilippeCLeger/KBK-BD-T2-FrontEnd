@@ -12,27 +12,8 @@ import AccordionSummary from '@mui/material/AccordionSummary';
 function App() {
   const [type, setType] = useState(TYPES_OUVRAGES.LIVRE.toString());
   return (
-    <div className="App" style={{display: "flex", flexDirection: "column", alignItems: "center"}}>
-      <Accordion sx={{
-            display: "flex",
-            flexDirection: "column",
-            p:"0.5rem",
-            maxWidth: "40rem"
-          }}>
-            <AccordionSummary
-            expandIcon={<ExpandMoreIcon />}
-            aria-controls="panel1a-content"
-            id="panel-header"
-            >
-            <Typography align="center" sx={{
-              width: "100%", 
-              fontWeight:"bold", 
-              fontSize:"1.25rem", 
-              color:"primary.main"
-              }}>
-                Ouvrages
-            </Typography>
-        </AccordionSummary>
+    <div className="App">
+      <Box sx={{display: "flex", flexDirection: "column", alignItems: "center"}}>
         <Box sx={{display: "flex", flexDirection: "column", alignItems: "stretch", width:"40rem"}}>
           <TabContext value={type}>
             <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
@@ -44,14 +25,48 @@ function App() {
             {Object.values(TYPES_OUVRAGES).map(type => (
               <TabPanel key={type} value={type.toString()}>
                 <Box sx={{display:'flex', flexDirection:'column', gap:1}}>
-                  <OuvrageForm type={type} />
-                  <OuvragesList type={type}/>
+                  <Accordion
+                    sx={{
+                      display: "flex",
+                      flexDirection: "column",
+                      p:"0.5rem",
+                      maxWidth: "40rem"
+                    }}>
+                      <AccordionSummary
+                        expandIcon={<ExpandMoreIcon />}
+                        aria-controls="panel1a-content"
+                        id="panel-header"
+                        >
+                          <Typography align="center" sx={{width: "100%", fontWeight:"bold", fontSize:"1.25rem", color:"primary.main" }}>
+                            {`Ajouter un ${type === TYPES_OUVRAGES.LIVRE ? "livre" : "périodique" }`}
+                          </Typography>
+                      </AccordionSummary>
+                      <OuvrageForm type={type} />
+                    </Accordion>
+                    <Accordion
+                      sx={{
+                        display: "flex",
+                        flexDirection: "column",
+                        p:"0.5rem",
+                        maxWidth: "40rem"
+                      }}>
+                      <AccordionSummary
+                        expandIcon={<ExpandMoreIcon />}
+                        aria-controls="panel1a-content"
+                        id="panel2-header"
+                        >
+                          <Typography align="center" sx={{width: "100%", fontWeight:"bold", fontSize:"1.25rem", color:"primary.main" }}>
+                            {`Afficher les ${type === TYPES_OUVRAGES.LIVRE ? "livres" : "périodiques" }`}
+                          </Typography>
+                      </AccordionSummary>
+                      <OuvragesList type={type}/>
+                    </Accordion>
                 </Box>
               </TabPanel>
             ))}
           </TabContext>
         </Box>
-      </Accordion>
+      </Box>
     </div>
   )
 }
